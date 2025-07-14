@@ -6,5 +6,6 @@
         <file>icons/close_hover.png</file>
         <file>icons/ctrl_cmd.png</file>
         <file>lang_english.qm</file>
+        <file>icons/user.png</file>
     </qresource>
 </RCC>

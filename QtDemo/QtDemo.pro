@@ -15,12 +15,14 @@ Release:DESTDIR= $$PWD/Bin/release
 
 SOURCES += \
     bars/infoform.cpp \
+    components/tableview/tablemodel.cpp \
     config.cpp \
     main.cpp \
     widget.cpp
 
 HEADERS += \
     bars/infoform.h \
+    components/tableview/tablemodel.h \
     config.h \
     widget.h
 
@@ -28,7 +30,8 @@ FORMS += \
     bars/infoform.ui \
     widget.ui
 
-INCLUDEPATH += $$PWD/bars
+INCLUDEPATH += $$PWD/bars \
+               $$PWD/components/tableview
 
 TRANSLATIONS += lang_english.ts
 
@@ -41,5 +44,5 @@ RESOURCES += \
     res.qrc
 
 DISTFILES += \
-    lang_english.qm \
-    stylesheet.md
+    ReadMe.md \
+    lang_english.qm

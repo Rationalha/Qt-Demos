@@ -7,9 +7,11 @@
 #include <QComboBox>
 #include <QMouseEvent>
 #include <QTranslator>
+#include <QStandardItemModel>
 #include "infoform.h"
 #include "config.h"
 #include "tablemodel.h"
+#include "tabledelegate.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -47,6 +49,7 @@ private:
 
     TableModel* m_tablemodel;
     QItemSelectionModel* m_selectionModel;
-
+    QStandardItemModel*  model;
+    TableDelegate*  m_delegate;
 };
 #endif // WIDGET_H

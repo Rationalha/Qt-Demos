@@ -36,26 +36,75 @@ void Widget::init()
 
 void Widget::initTableView()
 {
-   m_tablemodel=new TableModel();
-   ui->tableView->setModel(m_tablemodel);
-   ui->tableView->verticalHeader()->hide(); //隐藏垂直表头
-   // 表格宽度自动根据UI进行计算，不可手动调整宽度
-   ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-   // 显示网格线
-   ui->tableView->setShowGrid(true);
-   // 线的样式
-   ui->tableView->setGridStyle(Qt::DotLine);
-   //设置选中时为整行选中
-   ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-   for(int i=0;i<10;i++){
-       TableData tmp;
-       tmp.id=i;
-       tmp.name=QString("Student_%1").arg(i);
-       tmp.gender=i%2==0 ? "male":"female";
-       tmp.age=29;
-       tmp.department=u8"软件部门";
-       m_tablemodel->appendRow(tmp);
-   }
+    ui->tableView->verticalHeader()->hide();
+    QHeaderView* header=ui->tableView->horizontalHeader();
+    QFont font;
+    font.setFamily("Microsoft Yahei");
+    font.setPixelSize(18);
+    header->setFont(font);
+    header->setStyleSheet( "QHeaderView::section {background-color:#282C34;"
+                           "color:#aaaaaa;}");
+
+    //QStandardItemModel类提供用于存储自定义数据的通用模型
+    model = new QStandardItemModel(this);
+
+    //模拟一份固定的数据表
+    //设置列
+    const int col_count=5;
+    model->setHeaderData(0,Qt::Horizontal, "Id");
+    model->setHeaderData(1,Qt::Horizontal, "Name");
+    model->setHeaderData(2,Qt::Horizontal, "Age");
+    model->setHeaderData(3,Qt::Horizontal, "Gender");
+    model->setHeaderData(4,Qt::Horizontal, "Department");
+
+    //设置行
+    const int row_count=10;
+
+    //设置数据
+    for(int row=0;row<row_count;row++)
+    {
+        for(int col=0;col<col_count;col++)
+        {
+            QStandardItem *new_item=new QStandardItem;
+
+            switch(col)
+            {
+            default: break;
+                //int
+            case 0:
+                new_item->setData(row,Qt::DisplayRole);
+                break;
+                //string
+            case 1:
+                new_item->setData(QString::number(row),Qt::DisplayRole);
+                break;
+                //doublespinbox double
+            case 2:
+                new_item->setData(row,Qt::DisplayRole);
+                break;
+                //combobox list
+            case 3:
+                new_item->setData(QStringList{"Male","Female"},Qt::DisplayRole);
+                //这里使用userrole来保存列表的下标
+                new_item->setData(0,Qt::UserRole);
+                break;
+                //linedit string
+            case 4:
+                new_item->setData(QString(u8"软件部门"),Qt::DisplayRole);
+                break;
+            }
+            model->setItem(row, col, new_item);
+        }
+    }
+
+    //view会根据model提供的数据来渲染
+    ui->tableView->setModel(model);
+    m_delegate=new TableDelegate(this);
+    ui->tableView->setItemDelegate(m_delegate);
+    //resize模式，delegate的sizeHint才会生效
+    ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
 }
 
 

@@ -15,6 +15,7 @@ Release:DESTDIR= $$PWD/Bin/release
 
 SOURCES += \
     bars/infoform.cpp \
+    components/tableview/tabledelegate.cpp \
     components/tableview/tablemodel.cpp \
     config.cpp \
     main.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     bars/infoform.h \
+    components/tableview/tabledelegate.h \
     components/tableview/tablemodel.h \
     config.h \
     widget.h

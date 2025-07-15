@@ -87,7 +87,7 @@ QComboBox QAbstractItemView{
 
 QComboBox QAbstractItemView::item{
     height:36px;
-    color:#666666;
+	color: rgb(0, 0, 0);
     padding-left:9px;
     background-color:#FFFFFF;
 }

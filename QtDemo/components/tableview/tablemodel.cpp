@@ -4,10 +4,6 @@ TableModel::TableModel(QObject *parent) :
     QAbstractTableModel(parent)
 {
     m_headData<<"ID"<<"姓名"<<"年龄"<<"性别"<<"部门";
-
-    m_Font.setFamily("Microsoft Yahei");
-    m_Font.setPixelSize(17);
-
     m_icon.load(":/icons/user.png");
 }
 
@@ -123,7 +119,6 @@ QModelIndex TableModel::index(int row, int column, const QModelIndex &parent) co
         break;
 
     case 4:
-        //QString str = this->m_Z[row];
         department=m_datas[row].department;
         return createIndex(row, column,&department);
         break;

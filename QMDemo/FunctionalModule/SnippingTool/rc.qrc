@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/save.ico</file>
+        <file>img/clipping.ico</file>
+        <file>img/cancel.ico</file>
+        <file>img/precinct.ico</file>
+    </qresource>
+</RCC>

@@ -261,6 +261,7 @@ QPushButton:hover,QPushButton:pressed, QPushButton:checked {
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="page_treeview"/>
     </widget>
    </item>
   </layout>

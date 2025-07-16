@@ -21,4 +21,6 @@
     6. 添加QTableView功能，自定义一个TableView
        <!-- 7.14 -->
        添加自定义的tablemodel
-           
+    7. 实现自定义TreeModel
+       model通过固定的几个接口向view提供数据，规定了view的显示内容，
+       但保存数据的内存是多样的，根据数据类型的不同来定义；

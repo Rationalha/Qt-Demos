@@ -25,6 +25,7 @@ HEADERS += \
     bars/infoform.h \
     components/tableview/tabledelegate.h \
     components/tableview/tablemodel.h \
+    components/treeview/treedata.h \
     config.h \
     widget.h
 

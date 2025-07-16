@@ -27,10 +27,12 @@ void Widget::init()
     ui->comboBox->setView(new  QListView()); //该句让ComboBox的item样式生效
     ui->comboBox->addItem(tr(u8"按钮样式"));
     ui->comboBox->addItem(tr(u8"TableView"));
+    ui->comboBox->addItem(tr(u8"TreeView"));
     connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),
             this,SLOT(slotComboChangeHandle(int)));
 
     initTableView();
+    initTreeView();
 
 }
 
@@ -107,6 +109,42 @@ void Widget::initTableView()
 
 }
 
+void Widget::initTreeView()
+{
+    QHBoxLayout *mainLayout = new QHBoxLayout;
+
+    m_treeView = new QTreeView();
+    m_treeView->header()->setVisible(false);
+
+    m_treemodel = new QStandardItemModel(m_treeView);
+
+    QStandardItem *itemRoot=getTreeItem(tr("ALL"));
+    m_treemodel->appendRow(itemRoot);
+
+    for (int i = 0; i < 3; i++) {
+        QStandardItem *itemRt =getTreeItem(QString("RT%1").arg(i));
+        itemRoot->appendRow(itemRt); //根节点子节点
+
+        QStandardItem *itemRecv =getTreeItem(tr("Recv"));
+        itemRt->appendRow(itemRecv); //二级子节点
+        for (int j = 0; j < 3; j++) {
+            QStandardItem *itemSA =getTreeItem(QString("SA%1").arg(j));
+            itemRecv->appendRow(itemSA);
+        }
+
+        QStandardItem *itemSend =getTreeItem(tr("Send"));
+        itemRt->appendRow(itemSend);//二级子节点
+        for (int j = 0; j < 3; j++) {
+            QStandardItem *itemSA =getTreeItem(QString("SA%1").arg(j));
+            itemSend->appendRow(itemSA);//三级子节点
+        }
+    }
+
+    m_treeView->setModel(m_treemodel);
+    mainLayout->addWidget(m_treeView);
+    ui->page_treeview->setLayout(mainLayout);
+}
+
 
 void Widget::mousePressEvent(QMouseEvent *event)
 {
@@ -146,6 +184,20 @@ void Widget::leaveEvent(QEvent *event)
 {
     m_IsPressed = false;
     QWidget::leaveEvent(event);
+}
+
+QStandardItem *Widget::getTreeItem(QString item)
+{
+    QStandardItem *treeitem = new QStandardItem(item); //根节点
+    QFont font;
+    font.setFamily("Microsoft Yahei");
+    font.setPixelSize(18);
+    treeitem->setFont(font);
+
+    treeitem->setCheckable(true);
+    treeitem->setTristate(true); //支持三种状态：选中，未选中，部分选中
+    treeitem->setEditable(false);//不可编辑
+    return treeitem;
 }
 
 

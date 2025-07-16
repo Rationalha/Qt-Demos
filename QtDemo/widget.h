@@ -8,10 +8,12 @@
 #include <QMouseEvent>
 #include <QTranslator>
 #include <QStandardItemModel>
+#include <QTreeView>
 #include "infoform.h"
 #include "config.h"
 #include "tablemodel.h"
 #include "tabledelegate.h"
+
 
 
 QT_BEGIN_NAMESPACE
@@ -28,10 +30,12 @@ public:
 protected:
     void init();
     void initTableView();
+    void initTreeView();
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
     void leaveEvent(QEvent *event) override;
+    QStandardItem* getTreeItem(QString item);
 protected slots:
 
 private slots:
@@ -51,5 +55,7 @@ private:
     QItemSelectionModel* m_selectionModel;
     QStandardItemModel*  model;
     TableDelegate*  m_delegate;
+    QTreeView*    m_treeView;
+    QStandardItemModel*  m_treemodel;
 };
 #endif // WIDGET_H

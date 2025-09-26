@@ -7,5 +7,10 @@
         <file>icons/ctrl_cmd.png</file>
         <file>lang_english.qm</file>
         <file>icons/user.png</file>
+        <file>icons/run.png</file>
+        <file>icons/run_hover.png</file>
+        <file>icons/stop.png</file>
+        <file>icons/stop_hover.png</file>
+        <file>icons/sub.png</file>
     </qresource>
 </RCC>

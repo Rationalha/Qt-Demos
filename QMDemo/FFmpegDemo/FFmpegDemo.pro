@@ -13,7 +13,7 @@ TEMPLATE = subdirs
 
 # 加载库，ffmpeg n5.1.2版本 如果路径为空则不编译当前工程
 win32{
-    ffmpegPath = E:/lib/ffmpeg5-1-2
+    ffmpegPath = D:/ffmpeg5-1-2/ffmpeg
 }
 
 unix:!macx{

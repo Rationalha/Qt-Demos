@@ -156,6 +156,9 @@ QPushButton:hover{
 }
 </string>
      </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
      <widget class="QWidget" name="page_btn">
       <widget class="QPushButton" name="pushButton">
        <property name="geometry">
@@ -262,6 +265,141 @@ QPushButton:hover,QPushButton:pressed, QPushButton:checked {
       </layout>
      </widget>
      <widget class="QWidget" name="page_treeview"/>
+     <widget class="QWidget" name="page_graphics">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QGraphicsView" name="graphicsView"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_show">
+           <property name="minimumSize">
+            <size>
+             <width>121</width>
+             <height>41</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+    color: rgba(190, 190, 190, 1);
+    background-color: transparent;
+	border-image: url(:/icons/run.png);
+	border: none;
+}
+QPushButton:hover{
+    color: rgba(190, 190, 190, 1);
+    background-color: transparent;
+	border-image: url(:/icons/run_hover.png);
+	border: none;
+}
+</string>
+           </property>
+           <property name="text">
+            <string>显示</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_hide">
+           <property name="minimumSize">
+            <size>
+             <width>121</width>
+             <height>41</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+    color: rgba(190, 190, 190, 1);
+    background-color: rgba(58, 67, 80, 1);
+	border-radius:4px;
+    font: normal 15pt Microsoft Yahei;
+	border: none;
+}
+QPushButton:hover{
+    color: rgba(190, 190, 190, 1);
+    background-color:rgb(75, 75, 75);
+	border-radius:4px;
+    font: normal 15pt Microsoft Yahei;
+	border: none;
+}
+
+QPushButton:pressed, QPushButton:checked {
+    border: 1px solid #3a8ee6;
+    color: #409eff;
+}
+</string>
+           </property>
+           <property name="text">
+            <string>隐藏</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_del">
+           <property name="minimumSize">
+            <size>
+             <width>121</width>
+             <height>41</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+    color: rgba(190, 190, 190, 1);
+    background-color: rgba(58, 67, 80, 1);
+	border-radius:4px;
+    font: normal 15pt Microsoft Yahei;
+	border: none;
+}
+QPushButton:hover{
+    color: rgba(190, 190, 190, 1);
+    background-color:rgb(75, 75, 75);
+	border-radius:4px;
+    font: normal 15pt Microsoft Yahei;
+	border: none;
+}
+
+QPushButton:pressed, QPushButton:checked {
+    border: 1px solid #3a8ee6;
+    color: #409eff;
+}
+</string>
+           </property>
+           <property name="text">
+            <string>删除</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>

@@ -6,7 +6,7 @@ Widget::Widget(QWidget *parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    resize(1000,860);
+    showFullScreen();
     setWindowFlags(Qt::FramelessWindowHint);
     init();
     if(Conf->getLanguage()==1){
@@ -28,47 +28,47 @@ void Widget::init()
     ui->comboBox->addItem(tr(u8"按钮样式"));
     ui->comboBox->addItem(tr(u8"TableView"));
     ui->comboBox->addItem(tr(u8"TreeView"));
+    ui->comboBox->addItem(tr(u8"GraphicsView"));
     connect(ui->comboBox,SIGNAL(currentIndexChanged(int)),
             this,SLOT(slotComboChangeHandle(int)));
 
     initTableView();
     initTreeView();
-
+    initGraphicsView();
 }
 
 void Widget::initTableView()
 {
     ui->tableView->verticalHeader()->hide();
+    // 设置表头数据
     QHeaderView* header=ui->tableView->horizontalHeader();
     QFont font;
     font.setFamily("Microsoft Yahei");
     font.setPixelSize(18);
     header->setFont(font);
-    header->setStyleSheet( "QHeaderView::section {background-color:#282C34;"
-                           "color:#aaaaaa;}");
-
-    //QStandardItemModel类提供用于存储自定义数据的通用模型
+    header->setFixedHeight(50);
+    header->setStyleSheet(
+        "QHeaderView::section {"
+        "color:#aaaaaa;"
+        "background-color: #282C34;"
+        "padding: 4px;"
+        "border: none;"
+        "font-weight: bold;"
+        "}"
+    );
     model = new QStandardItemModel(this);
+    QStringList headers = {"Id", "Name", "Age","Gender","Department","opt"};
+    model->setHorizontalHeaderLabels(headers);
+
 
     //模拟一份固定的数据表
-    //设置列
-    const int col_count=5;
-    model->setHeaderData(0,Qt::Horizontal, "Id");
-    model->setHeaderData(1,Qt::Horizontal, "Name");
-    model->setHeaderData(2,Qt::Horizontal, "Age");
-    model->setHeaderData(3,Qt::Horizontal, "Gender");
-    model->setHeaderData(4,Qt::Horizontal, "Department");
-
-    //设置行
+    const int col_count=6;
     const int row_count=10;
-
-    //设置数据
     for(int row=0;row<row_count;row++)
     {
         for(int col=0;col<col_count;col++)
         {
             QStandardItem *new_item=new QStandardItem;
-
             switch(col)
             {
             default: break;
@@ -86,9 +86,7 @@ void Widget::initTableView()
                 break;
                 //combobox list
             case 3:
-                new_item->setData(QStringList{"Male","Female"},Qt::DisplayRole);
-                //这里使用userrole来保存列表的下标
-                new_item->setData(0,Qt::UserRole);
+                new_item->setData(row,Qt::DisplayRole);
                 break;
                 //linedit string
             case 4:
@@ -98,15 +96,16 @@ void Widget::initTableView()
             model->setItem(row, col, new_item);
         }
     }
-
     //view会根据model提供的数据来渲染
     ui->tableView->setModel(model);
-    m_delegate=new TableDelegate(this);
-    ui->tableView->setItemDelegate(m_delegate);
+    m_custDelegate=new CustomDelegate(this);
+    ui->tableView->setItemDelegate(m_custDelegate);
     //resize模式，delegate的sizeHint才会生效
+    ui->tableView->setShowGrid(false);
+    ui->tableView->setFrameShape(QFrame::NoFrame);
     ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    //采用拉伸模式的话，delegate里设置的宽度将无效
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-
 }
 
 void Widget::initTreeView()
@@ -143,6 +142,22 @@ void Widget::initTreeView()
     m_treeView->setModel(m_treemodel);
     mainLayout->addWidget(m_treeView);
     ui->page_treeview->setLayout(mainLayout);
+}
+
+void Widget::initTableView2()
+{
+    //设置表头样式与内容
+
+}
+
+void Widget::initGraphicsView()
+{
+    m_ellipse= new QGraphicsEllipseItem(-50, -50,100,100);
+    m_ellipse->setBrush(QBrush(Qt::gray));
+    m_ellipse->setPen(QPen(Qt::black));
+    m_scene=new QGraphicsScene();
+    ui->graphicsView->setScene(m_scene);
+    m_scene->addItem(m_ellipse);
 }
 
 
@@ -216,3 +231,15 @@ void Widget::on_btn_agree_clicked()
 {
     INFO->Show(tr(u8"这是一个测试信息"));
 }
+
+void Widget::on_btn_hide_clicked()
+{
+    m_ellipse->hide();
+}
+
+
+void Widget::on_btn_show_clicked()
+{
+    m_ellipse->show();
+}
+

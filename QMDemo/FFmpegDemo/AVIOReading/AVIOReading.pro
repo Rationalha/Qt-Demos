@@ -46,11 +46,14 @@ msvc {
     }
 }
 
+
+ffmpeg_path= D:/ffmpeg5-1-2/ffmpeg
+
 # 加载库，ffmpeg n5.1.2版本
 win32{
-LIBS += -LE:/lib/ffmpeg5-1-2/lib/ -lavcodec -lavfilter -lavformat -lswscale -lavutil -lswresample -lavdevice
-INCLUDEPATH += E:/lib/ffmpeg5-1-2/include
-DEPENDPATH += E:/lib/ffmpeg5-1-2/include
+LIBS += -L$$(ffmpeg_path)/lib/ -lavcodec -lavfilter -lavformat -lswscale -lavutil -lswresample -lavdevice
+INCLUDEPATH += $$(ffmpeg_path)/include
+DEPENDPATH += $$(ffmpeg_path)/include
 }
 
 unix:!macx{

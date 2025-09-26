@@ -8,12 +8,16 @@
 #include <QMouseEvent>
 #include <QTranslator>
 #include <QStandardItemModel>
+#include <QGraphicsScene>
+#include <QGraphicsEllipseItem>
+#include <QGraphicsView>
 #include <QTreeView>
 #include "infoform.h"
 #include "config.h"
 #include "tablemodel.h"
 #include "tabledelegate.h"
-
+#include "buttonitemdelegate.h"
+#include "customdelegate.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -31,6 +35,8 @@ protected:
     void init();
     void initTableView();
     void initTreeView();
+    void initTableView2();
+    void initGraphicsView();
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
@@ -42,6 +48,10 @@ private slots:
     void on_btn_close_clicked();
     void slotComboChangeHandle(int index);
     void on_btn_agree_clicked();
+
+    void on_btn_hide_clicked();
+
+    void on_btn_show_clicked();
 
 private:
     Ui::Widget *ui;
@@ -55,7 +65,11 @@ private:
     QItemSelectionModel* m_selectionModel;
     QStandardItemModel*  model;
     TableDelegate*  m_delegate;
+    ButtonItemDelegate*   m_btnDelegate;
     QTreeView*    m_treeView;
     QStandardItemModel*  m_treemodel;
+    QGraphicsEllipseItem*  m_ellipse;
+    QGraphicsScene*        m_scene;
+    CustomDelegate*     m_custDelegate;
 };
 #endif // WIDGET_H
